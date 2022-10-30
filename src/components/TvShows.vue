@@ -8,13 +8,13 @@
  -->
 
 <script setup>
+import Header from './Layout/Header.vue'
 </script>
 <style scoped>
 
 </style>
 <template>
   <div>
-    <p class="font-bold text-xl">TV Shows</p>
+    <Header />
   </div>
-
 </template>
