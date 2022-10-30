@@ -35,7 +35,7 @@ const showListing = (showGenre) => {
   console.log('gn', showGenre)
   let tvShows = [];
   showsStore.shows.filter(show => {
-    if(show.genres.includes(showGenre)){
+    if (show.genres.includes(showGenre)) {
       tvShows.push(show)
     }
   })
@@ -57,18 +57,21 @@ onMounted(() => {
 <template>
   <div>
     <Header />
-    <div class="mt-5" v-for="(genreName, index) in groupByGenre" :key="index">
-      <div class="text-gray-300 text-lg mb-2 font-light ">{{genreName}}</div>
-      <div class="flex relative overflow-hidden duration-700 ease-in-out items-center space-x-6">
-        <!-- <span><ChevronLeftIcon class="h-10"/></span> -->
-        
-        <div class="flex-shrink-0 shadow-xl"  v-for="(show, index) in showListing(genreName)" :key="index">
-          <img :src="show.image.medium" class="rounded-t-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
-          <div class="bg-slate-200 bg-opacity-80 hover:bg-gray-500 hover:text-white hover:cusror-pointer absolute bottom-0 p-2 w-full text-gray-800">
-            <span class="font-medium">{{show.name}}</span>
-          </div>
+    <div class="px-6 py-12">
+      <div class="mt-5 " v-for="(genreName, index) in groupByGenre" :key="index">
+        <div class="text-gray-300 text-lg mb-2 font-light ">{{ genreName }}</div>
+        <div class="flex relative overflow-hidden duration-700 ease-in-out items-center space-x-6">
+          <!-- <span><ChevronLeftIcon class="h-10"/></span> -->
+
+          <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index">
+            <img :src="show.image.medium" class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
+            <div
+              class="bg-slate-200 rounded-b-lg bg-opacity-70 hover:bg-gray-500 hover:text-white hover:cusror-pointer absolute bottom-0 p-2 w-full text-slate-800">
+              <span class="font-bold">{{ show.name }}</span>
+            </div>
           </div>
           <!-- <span><ChevronRightIcon class="h-10"/></span> -->
+        </div>
       </div>
     </div>
   </div>
