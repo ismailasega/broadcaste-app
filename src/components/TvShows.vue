@@ -22,7 +22,6 @@ const showsStore = useShowsStore()
 const groupByGenre = computed(() => {
   let showGenres = [];
   showsStore.shows.forEach(genre => showGenres.push(genre.genres))
-  console.log('data', showGenres)
   return Object.assign({}, ...showGenres);
 })
 
@@ -32,14 +31,12 @@ const groupByGenre = computed(() => {
  * Getting the list of shows under specfic genre
  */
 const showListing = (showGenre) => {
-  console.log('gn', showGenre)
   let tvShows = [];
   showsStore.shows.filter(show => {
     if (show.genres.includes(showGenre)) {
       tvShows.push(show)
     }
   })
-  console.log('listundergenre', tvShows)
   return tvShows;
 }
 

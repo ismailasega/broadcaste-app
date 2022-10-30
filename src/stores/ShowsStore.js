@@ -38,7 +38,8 @@ export const useShowsStore = defineStore('ShowsStore', {
 
         /**
          * 
-         * @param {*} showName 
+         * @param {*} showName
+         * Searching by show name
          */
         async searchShowsByName(showName) {
             const url = `https://api.tvmaze.com/search/shows?q=${showName}`;
@@ -52,7 +53,8 @@ export const useShowsStore = defineStore('ShowsStore', {
 
         /**
          * 
-         * @param {*} id 
+         * @param {*} id
+         * Getting show details of a specific show by show-id
          */
         async getTvShowDetails(id) {
             const url = `https://api.tvmaze.com/shows/${id}`;
