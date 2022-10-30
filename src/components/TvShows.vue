@@ -7,8 +7,14 @@
   * @Tel: +256-784-491412 / +256-756-454376
  -->
 
+<script setup>
+</script>
+<style scoped>
+
+</style>
 <template>
-<div>
-<router-view/>
-</div>
+  <div>
+    <p class="font-bold text-xl">TV Shows</p>
+  </div>
+
 </template>

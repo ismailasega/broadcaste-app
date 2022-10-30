@@ -7,8 +7,15 @@
   * @Tel: +256-784-491412 / +256-756-454376
  -->
 
+<script setup>
+import TvShows from '../components/TvShows.vue'
+</script>
+<style scoped>
+
+</style>
 <template>
-<div>
-<router-view/>
-</div>
+    <div>
+        <TvShows />
+    </div>
+
 </template>
