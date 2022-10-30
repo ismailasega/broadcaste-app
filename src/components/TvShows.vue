@@ -8,11 +8,19 @@
  -->
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
 import Header from './Layout/Header.vue'
 import { useShowsStore } from '@/stores/ShowsStore' 
 
 const showsStore = useShowsStore()
+
+const groupByGenre = computed(() => {
+  let showGenres = [];
+  showsStore.shows.forEach(genre => showGenres.push(genre.genres))
+  console.log('data', showGenres)
+  return Object.assign({}, ...showGenres);
+})
+
 
 onMounted(() => {
   showsStore.getAllTvShows()
@@ -24,6 +32,8 @@ onMounted(() => {
 <template>
   <div>
     <Header />
-    {{showsStore}}
+    <div v-for="(genreName, index) in groupByGenre" :key="index">
+      <span>{{genreName}}</span>
+    </div>
   </div>
 </template>

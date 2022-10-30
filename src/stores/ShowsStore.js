@@ -11,15 +11,60 @@ import axios from "axios";
 export const useShowsStore = defineStore('ShowsStore', {
     state: () => {
         return {
-            shows: []
-        }; 
-    } ,
+            shows: [],
+            showDetails: null,
+            isLoading: false,
+            error: null,
+        };
+    },
 
     actions: {
+        /**
+         * 
+         * getting all TvShows
+         */
         async getAllTvShows() {
-            const url = 'https://api.tvmaze.com/shows';
-            const tvShows = await axios.get(url);
-            this.shows.push(tvShows)
+            const url = 'https://api.tvmaze.com/shows?page=1';
+            this.isLoading = true
+            try {
+                const tvShows = await axios.get(url);
+                this.shows = tvShows.data;
+                this.isLoading = false;
+            } catch (error) {
+                this.error = error
+                this.isLoading = false;
+            }
+        },
+
+        /**
+         * 
+         * @param {*} showName 
+         */
+        async searchShowsByName(showName) {
+            const url = `https://api.tvmaze.com/search/shows?q=${showName}`;
+            try {
+                const filteredTvShows = await axios.get(url);
+                this.shows = filteredTvShows.data;
+            } catch (error) {
+                this.error = error
+            }
+        },
+
+        /**
+         * 
+         * @param {*} id 
+         */
+        async getTvShowDetails(id) {
+            const url = `https://api.tvmaze.com/shows/${id}`;
+            this.isLoading = true
+            try {
+                const tvShowDetails = await axios.get(url);
+                this.showDetails = tvShowDetails.data;
+                this.isLoading = false;
+            } catch (error) {
+                this.error = error
+                this.isLoading = false;
+            }
         }
     }
 }) 
