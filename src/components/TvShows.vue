@@ -8,7 +8,15 @@
  -->
 
 <script setup>
+import { onMounted } from "vue";
 import Header from './Layout/Header.vue'
+import { useShowsStore } from '@/stores/ShowsStore' 
+
+const showsStore = useShowsStore()
+
+onMounted(() => {
+  showsStore.getAllTvShows()
+})
 </script>
 <style scoped>
 
@@ -16,5 +24,6 @@ import Header from './Layout/Header.vue'
 <template>
   <div>
     <Header />
+    {{showsStore}}
   </div>
 </template>

@@ -5,7 +5,6 @@
 // * @GitLab: https://gitlab.com/asegaismail
 // * @Tel: +256-784-491412 / +256-756-454376
 
-
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashoard from '../views/Dashboard.vue'
 
