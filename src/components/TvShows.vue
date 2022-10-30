@@ -9,11 +9,15 @@
 
 <script setup>
 import { onMounted, computed } from "vue";
-import Header from './Layout/Header.vue'
-import { useShowsStore } from '@/stores/ShowsStore' 
+import Header from './Layout/Header.vue';
+import { useShowsStore } from '@/stores/ShowsStore';
 
 const showsStore = useShowsStore()
 
+/**
+ * 
+ * Generating and array of genres based on the returned data attribute genres
+ */
 const groupByGenre = computed(() => {
   let showGenres = [];
   showsStore.shows.forEach(genre => showGenres.push(genre.genres))
@@ -21,7 +25,27 @@ const groupByGenre = computed(() => {
   return Object.assign({}, ...showGenres);
 })
 
+/**
+ * 
+ * @param {*} showGenre 
+ * Getting the list of shows under specfic genre
+ */
+const showListing = (showGenre) => {
+  console.log('gn', showGenre)
+  let tvShows = [];
+  showsStore.shows.filter(show => {
+    if(show.genres.includes(showGenre)){
+      tvShows.push(show)
+    }
+  })
+  console.log('listundergenre', tvShows)
+  return tvShows;
+}
 
+/**
+ * 
+ * Setting data display whenever the component is rendered
+ */
 onMounted(() => {
   showsStore.getAllTvShows()
 })
@@ -33,7 +57,12 @@ onMounted(() => {
   <div>
     <Header />
     <div v-for="(genreName, index) in groupByGenre" :key="index">
-      <span>{{genreName}}</span>
+      <span class="text-gray-400 font-medium">{{genreName}}</span>
+      <div class="flex overflow-x-auto space-x-8">
+        <div class="flex-shrink-0"  v-for="(show, index) in showListing(genreName)" :key="index">
+          <img :src="show.image.medium" />
+          {{show.name}}</div>
+      </div>
     </div>
   </div>
 </template>
