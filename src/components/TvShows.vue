@@ -11,6 +11,7 @@
 import { onMounted, computed } from "vue";
 import Header from './Layout/Header.vue';
 import { useShowsStore } from '@/stores/ShowsStore';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/outline'
 
 const showsStore = useShowsStore()
 
@@ -56,12 +57,18 @@ onMounted(() => {
 <template>
   <div>
     <Header />
-    <div v-for="(genreName, index) in groupByGenre" :key="index">
-      <span class="text-gray-400 font-medium">{{genreName}}</span>
-      <div class="flex overflow-x-auto space-x-8">
-        <div class="flex-shrink-0"  v-for="(show, index) in showListing(genreName)" :key="index">
-          <img :src="show.image.medium" />
-          {{show.name}}</div>
+    <div class="mt-5" v-for="(genreName, index) in groupByGenre" :key="index">
+      <div class="text-gray-300 text-lg mb-2 font-light ">{{genreName}}</div>
+      <div class="flex relative overflow-hidden duration-700 ease-in-out items-center space-x-6">
+        <!-- <span><ChevronLeftIcon class="h-10"/></span> -->
+        
+        <div class="flex-shrink-0 shadow-xl"  v-for="(show, index) in showListing(genreName)" :key="index">
+          <img :src="show.image.medium" class="rounded-t-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
+          <div class="bg-slate-200 bg-opacity-80 hover:bg-gray-500 hover:text-white hover:cusror-pointer absolute bottom-0 p-2 w-full text-gray-800">
+            <span class="font-medium">{{show.name}}</span>
+          </div>
+          </div>
+          <!-- <span><ChevronRightIcon class="h-10"/></span> -->
       </div>
     </div>
   </div>

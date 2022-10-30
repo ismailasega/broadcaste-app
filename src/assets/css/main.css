@@ -9,4 +9,20 @@
   font-weight: normal;
 }
 
+/* Scroller */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: dimgray;
+  border-radius: 50px;
+}
+
 
