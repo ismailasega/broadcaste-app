@@ -28,8 +28,9 @@ const groupByGenre = computed(() => {
     if(typeof show?.genres !== 'undefined') showGenres.push(show.genres)
     else showGenres.push(show['show']['genres'])
   })
-  console.log(Object.assign({}, ...showGenres))
-  return Object.assign({}, ...showGenres);
+  let filterShowGenres = showGenres.reduce((x, y) => x.concat(y), [])
+  filterShowGenres = new Set(filterShowGenres);
+  return filterShowGenres
 })
 
 /**

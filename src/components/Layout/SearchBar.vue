@@ -83,7 +83,6 @@ const filteredShowNames = computed(() => {
 const selectedShowName = (showName) => {
   showsStore.searchShowsByName(showName.name);
   keyword.value = showName.name;
-  console.log('selctedName', showName)
 }
 
 
