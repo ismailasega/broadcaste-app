@@ -46,14 +46,19 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
       <div class="bg-gradient-to-t from-[#181818] h-full absolute bottom-0 p-2 w-full text-gray-900"></div>
       <div class="m-10 ">
       <div
-        class="bg-white bg-opacity-20 flex flex-col z-40 backdrop-blur-sm drop-shadow-lg h-[100px] rounded-xl absolute bottom-0 p-2 w-full text-white">
-        <span class="font-bold mb-4">{{ selectedShowDetails.name }}</span>
-        <div class="flex flex-row justify-between items-center px-4">
+        class="bg-white bg-opacity-20 flex flex-col z-40 backdrop-blur-sm drop-shadow-lg h-[150px] rounded-lg absolute bottom-0 p-2 w-full text-white">
+        <span class="font-bold text-xl mb-4">{{ selectedShowDetails.name }}</span>
+        <div class="flex flex-col px-4">
+        <div class="flex flex-row justify-between items-center">
         <span v-for="(genre, index) in selectedShowDetails.genres" :key="index">
           <span class="bg-pink-600 rounded-full py-1 px-4 text-sm ">{{genre}}</span>
         </span>
+        </div>
+        <div class="flex-row flex justify-between items-center border-t boder-gray-600 pt-3 mt-4">
+        <span class="bg-slate-600 rounded-full py-1 px-4 text-sm ">{{selectedShowDetails.type}}</span>
         <span class="bg-blue-600 rounded-full py-1 px-4 text-sm ">{{selectedShowDetails.runtime + ' ' +'mins'}}</span>
-        <span class="bg-orange-600 rounded-full py-1 px-4 text-sm flex flex-row items-center "><span>{{selectedShowDetails.rating.average}}</span><StarIcon class="ml-1 h-4 w-4"/></span>   
+        <span class="bg-orange-600 rounded-full py-1 px-4 text-sm flex flex-row items-center "><span>{{selectedShowDetails.rating.average}}</span><StarIcon class="ml-1 h-4 w-4"/></span> 
+        </div>  
         </div>
       </div>
       </div>
@@ -62,23 +67,36 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
       </div>
     </div>
     <div class="mt-20 px-6 z-40">
-      <div class="flex flex-row items-center justify-between border-b border-gray-600 pb-4">
+      <div class="flex flex-row items-center justify-between border-b border-gray-700 pb-4">
       <div >
-        <h6 class="text-gray-500 font-medium text-xl">Language</h6>
+        <h6 class="text-gray-200 font-medium text-xl">Language</h6>
         <span>{{selectedShowDetails.language}}</span>
       </div>
       <div>
-        <h6 class="text-gray-500 font-medium text-xl">Premiered</h6>
+        <h6 class="text-gray-200 font-medium text-xl">Premiered</h6>
         <span>{{selectedShowDetails.premiered}}</span>
       </div>
       <div>
-        <h6 class="text-gray-500 font-medium text-xl">Status</h6>
+        <h6 class="text-gray-200 font-medium text-xl">Status</h6>
         <span>{{selectedShowDetails.status}}</span>
       </div>
       </div>
+       <div class="mt-2 border-b border-gray-700 pb-4">
+        <h6 class="text-gray-200 font-medium text-xl">Schedule</h6>
+        <div class="flex flex-row items-center justify-between">
+        <div v-for="(schedule, index) in selectedShowDetails.schedule.days" :key="index">
+          <span>{{schedule}}</span>
+        </div>
+        </div>
+        <span>Time: {{selectedShowDetails.schedule.time}}</span>
+      </div>
       <div class="mt-2">
-        <h6 class="text-gray-500 font-medium text-xl">About</h6>
+        <h6 class="text-gray-200 font-medium text-xl">About</h6>
         <div v-html="selectedShowDetails.summary"> </div>
+      </div>
+      <div class="mt-2">
+        <h6 class="text-gray-200 font-medium text-xl">Official site</h6>
+        <span>{{selectedShowDetails.officialSite}}</span>
       </div>
       </div>
   </div>
