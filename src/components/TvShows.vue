@@ -63,8 +63,8 @@ onMounted(() => {
           <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index">
             <img :src="show.image.medium" class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
             <div
-              class="bg-slate-200 rounded-b-lg bg-opacity-70 hover:bg-gray-500 hover:text-white hover:cusror-pointer absolute bottom-0 p-2 w-full text-slate-800">
-              <span class="font-bold">{{ show.name }}</span>
+              class="bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg rounded-b-lg hover:bg-gray-500 hover:text-white hover:cursor-pointer absolute bottom-0 p-2 w-full text-gray-900">
+              <span class="font-bold flex items-center justify-center">{{ show.name }}</span>
             </div>
           </div>
           <!-- <span><ChevronRightIcon class="h-10"/></span> -->
