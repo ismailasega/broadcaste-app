@@ -118,7 +118,7 @@ onMounted(() => {
       <div class="mt-5 " v-for="(genreName, index) in groupByGenre" :key="index">
         <div class="text-gray-300 text-lg mb-2 font-light ">{{ genreName }}</div>
         <div class="flex relative scrolling-wrapper flex-grow duration-700 ease-in-out items-center space-x-6">
-          <div class="flex-shrink-0 w-32 movie-card shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index" @click="openShowDetailsModal">
+          <div class="flex-shrink-0 w-32 movie-card shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index" @click="openShowDetailsModal(show)">
             <img :src="show?.image?.medium" class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
             <div
               class="bg-white bg-opacity-50 w-full backdrop-blur-sm drop-shadow-lg rounded-b-lg hover:bg-gray-500 hover:text-white hover:cursor-pointer absolute bottom-0 p-2 text-gray-900">

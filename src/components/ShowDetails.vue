@@ -41,9 +41,10 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
   </div>
   <!-- Mobile View -->
   <div class="top-0 mobile-view detailsModal block fixed z-30 w-full bg-[#181818] h-20" v-if="isShowDetailsModal">
-    <div class="">
-      <img :src="selectedShowDetails?.image?.original" class="rounded-lg w-[500px] op flex items-center justify-center opacity-60" />
-      <div class="grid justify-items-stretch absolute top-4 z-10">
+    <div class="relative">
+      <img :src="selectedShowDetails?.image?.original" class="rounded-lg opacity-70 w-[500px] flex items-center justify-center" />
+      <div class="bg-gradient-to-t from-[#181818] h-full absolute bottom-0 p-2 w-full text-gray-900"></div>
+      <div class="grid justify-items-stretch absolute top-2 z-10">
       <ChevronLeftIcon @click="closeShowDetailsModal" class="h-12 w-12 justify-self-end hover:cursor-pointer hover:text-lime-600"/>
       </div>
     </div>
