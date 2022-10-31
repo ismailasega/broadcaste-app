@@ -67,9 +67,9 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
           </div>
         </div>
       </div>
-      <div class="grid justify-items-stretch absolute top-5 z-10">
+      <div class="grid justify-items-stretch absolute top-5 z-50">
         <ChevronLeftIcon @click="closeShowDetailsModal"
-          class="h-12 w-12 bg-white text-white z-60 rounded-r-2xl bg-opacity-20 backdrop-blur-sm drop-shadow-lg hover:cursor-pointer hover:text-black fixed" />
+          class="h-12 w-12 bg-white text-white rounded-r-2xl bg-opacity-20 backdrop-blur-sm drop-shadow-lg hover:cursor-pointer hover:text-black fixed" />
       </div>
     </div>
     <div class="mt-20 px-6 z-40">
