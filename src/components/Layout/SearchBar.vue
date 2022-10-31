@@ -35,6 +35,8 @@ const hideSearchField = () => {
   isSearch.value = true;
   searchField.value = false;
   state.searchOptions = false;
+  keyword.value = "";
+  showsStore.getAllTvShows()
 }
 
 /**
@@ -43,6 +45,7 @@ const hideSearchField = () => {
  */
 const showSearchOptions = () => {
   state.searchOptions = true
+  showsStore.getAllTvShows()
 }
 
 const hideSearchOptions = () => {
@@ -63,14 +66,25 @@ const filteredShowNames = computed(() => {
   }
   if(keyword){
     showsStore.shows.filter((show) => {
-    if(show.name
-    .toUpperCase()
-    .includes(keyword.value.toUpperCase()))
+    if(show?.name
+    ?.toString()
+    ?.toLowerCase()
+    ?.indexOf(keyword.value.toString().toLowerCase()) > -1)
     tvShowName.push(show);
   })
   }
   return tvShowName
 })
+
+/**
+ * 
+ * Selecting a search option
+ */
+const selectedShowName = (showName) => {
+  showsStore.searchShowsByName(showName.name);
+  keyword.value = showName.name;
+  console.log('selctedName', showName)
+}
 
 
 /**
@@ -104,7 +118,7 @@ input{
             </div>
             <div v-if="state.searchOptions" class="bg-white mt-1 bg-opacity-80 backdrop-blur-sm drop-shadow-lg rounded-b-lg w-80 h-60 z-40 overflow-y-auto text-sm absolute ">
               <div v-if="filteredShowNames.length > 0">
-              <div class="grid grid-cols-1 divide-y" v-for="(show, index) in filteredShowNames" :key="index">
+              <div class="grid grid-cols-1 divide-y" v-for="(show, index) in filteredShowNames" :key="index" @click="selectedShowName(show)">
                 <div class="text-gray-900 p-2 border-b border-gray-400 hover:font-bold hover:text-black hover:cursor-pointer">{{show.name}}</div>
               </div>
               </div>
@@ -129,7 +143,7 @@ input{
             </div>
             <div v-if="state.searchOptions" class="bg-white mt-1 bg-opacity-80 backdrop-blur-sm drop-shadow-lg rounded-b-lg w-full h-60 z-40 overflow-y-auto text-sm absolute ">
               <div v-if="filteredShowNames.length > 0">
-              <div class="grid grid-cols-1 divide-y" v-for="(show, index) in filteredShowNames" :key="index">
+              <div class="grid grid-cols-1 divide-y" v-for="(show, index) in filteredShowNames" :key="index" @click="selectedShowName(show)">
                 <div class="text-gray-900 p-2 border-b border-gray-400 hover:font-bold hover:text-black hover:cursor-pointer">{{show.name}}</div>
               </div>
               </div>

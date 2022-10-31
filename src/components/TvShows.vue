@@ -9,11 +9,14 @@
 
 <script setup>
 import { onMounted, computed } from "vue";
+import { storeToRefs } from "pinia";
 import Header from './Layout/Header.vue';
 import { useShowsStore } from '@/stores/ShowsStore';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/outline'
 
 const showsStore = useShowsStore()
+
+const { shows } = storeToRefs(showsStore);
 
 /**
  * 
@@ -21,7 +24,11 @@ const showsStore = useShowsStore()
  */
 const groupByGenre = computed(() => {
   let showGenres = [];
-  showsStore.shows.forEach(genre => showGenres.push(genre.genres))
+  shows.value.forEach(show => {
+    if(typeof show?.genres !== 'undefined') showGenres.push(show.genres)
+    else showGenres.push(show['show']['genres'])
+  })
+  console.log(Object.assign({}, ...showGenres))
   return Object.assign({}, ...showGenres);
 })
 
@@ -32,10 +39,9 @@ const groupByGenre = computed(() => {
  */
 const showListing = (showGenre) => {
   let tvShows = [];
-  showsStore.shows.filter(show => {
-    if (show.genres.includes(showGenre)) {
-      tvShows.push(show)
-    }
+  shows.value.filter(show => {
+    if (typeof show?.genres !== 'undefined' && show.genres.includes(showGenre)) tvShows.push(show)
+    else if(typeof show?.show !== 'undefined' && show.show.genres.includes(showGenre)) tvShows.push(show.show)
   })
   return tvShows;
 }
@@ -74,7 +80,7 @@ onMounted(() => {
           <!-- <span><ChevronLeftIcon class="h-10"/></span> -->
 
           <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index">
-            <img :src="show.image.medium" class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
+            <img :src="show?.image?.medium" class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
             <div
               class="bg-white bg-opacity-50 backdrop-blur-sm drop-shadow-lg rounded-b-lg hover:bg-gray-500 hover:text-white hover:cursor-pointer absolute bottom-0 p-2 w-full text-gray-900">
               <span class="font-bold flex items-center justify-center">{{ show.name }}</span>
@@ -91,7 +97,7 @@ onMounted(() => {
         <div class="text-gray-300 text-lg mb-2 font-light ">{{ genreName }}</div>
         <div class="flex relative scrolling-wrapper flex-grow duration-700 ease-in-out items-center space-x-6">
           <div class="flex-shrink-0 w-32 movie-card shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index">
-            <img :src="show.image.medium" class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
+            <img :src="show?.image?.medium" class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
             <div
               class="bg-white bg-opacity-50 w-full backdrop-blur-sm drop-shadow-lg rounded-b-lg hover:bg-gray-500 hover:text-white hover:cursor-pointer absolute bottom-0 p-2 text-gray-900">
               <span class="font-bold text-sm truncate flex items-center justify-center">{{ show.name }}</span>
