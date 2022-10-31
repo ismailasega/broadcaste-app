@@ -12,7 +12,6 @@ export const useShowsStore = defineStore('ShowsStore', {
     state: () => {
         return {
             shows: [],
-            showDetails: null,
             isLoading: false,
             error: null,
         };
@@ -51,22 +50,5 @@ export const useShowsStore = defineStore('ShowsStore', {
             }
         },
 
-        /**
-         * 
-         * @param {*} id
-         * Getting show details of a specific show by show-id
-         */
-        async getTvShowDetails(id) {
-            const url = `https://api.tvmaze.com/shows/${id}`;
-            this.isLoading = true
-            try {
-                const tvShowDetails = await axios.get(url);
-                this.showDetails = tvShowDetails.data;
-                this.isLoading = false;
-            } catch (error) {
-                this.error = error
-                this.isLoading = false;
-            }
-        }
     }
 }) 
