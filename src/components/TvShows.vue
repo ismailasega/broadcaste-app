@@ -26,7 +26,7 @@ const { shows } = storeToRefs(showsStore);
 const groupByGenre = computed(() => {
   let showGenres = [];
   shows.value.forEach(show => {
-    if(typeof show?.genres !== 'undefined') showGenres.push(show.genres)
+    if (typeof show?.genres !== 'undefined') showGenres.push(show.genres)
     else showGenres.push(show['show']['genres'])
   })
   let filterShowGenres = showGenres.reduce((x, y) => x.concat(y), [])
@@ -43,7 +43,7 @@ const showListing = (showGenre) => {
   let tvShows = [];
   shows.value.filter(show => {
     if (typeof show?.genres !== 'undefined' && show.genres.includes(showGenre)) tvShows.push(show)
-    else if(typeof show?.show !== 'undefined' && show.show.genres.includes(showGenre)) tvShows.push(show.show)
+    else if (typeof show?.show !== 'undefined' && show.show.genres.includes(showGenre)) tvShows.push(show.show)
   })
   return tvShows;
 }
@@ -86,13 +86,12 @@ onMounted(() => {
   display: inline-block;
 }
 
-
 .scrolling-wrapper::-webkit-scrollbar {
-    display: none;
-  }
+  display: none;
+}
 </style>
 <template>
-<ShowDetails :selectedShowDetails="selectedShowDetails" />
+  <ShowDetails :selectedShowDetails="selectedShowDetails" />
   <div class="relative">
     <Header />
     <div class="desktop-view px-6 py-20">
@@ -100,9 +99,10 @@ onMounted(() => {
         <div class="text-gray-300 text-lg mb-2 font-light ">{{ genreName }}</div>
         <div class="flex relative flex-grow duration-700 ease-in-out items-center space-x-6">
           <!-- <span><ChevronLeftIcon class="h-10"/></span> -->
-
-          <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index" @click="openShowDetailsModal(show)">
-            <img :src="show?.image?.medium" class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
+          <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index"
+            @click="openShowDetailsModal(show)">
+            <img :src="show?.image?.medium"
+              class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
             <div
               class="bg-white bg-opacity-50 backdrop-blur-sm drop-shadow-lg rounded-b-lg hover:bg-gray-500 hover:text-white hover:cursor-pointer absolute bottom-0 p-2 w-full text-gray-900">
               <span class="font-bold flex items-center justify-center">{{ show.name }}</span>
@@ -118,8 +118,10 @@ onMounted(() => {
       <div class="mt-5 " v-for="(genreName, index) in groupByGenre" :key="index">
         <div class="text-gray-300 text-lg mb-2 font-light ">{{ genreName }}</div>
         <div class="flex relative scrolling-wrapper flex-grow duration-700 ease-in-out items-center space-x-6">
-          <div class="flex-shrink-0 w-32 movie-card shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index" @click="openShowDetailsModal(show)">
-            <img :src="show?.image?.medium" class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
+          <div class="flex-shrink-0 w-32 movie-card shadow-xl" v-for="(show, index) in showListing(genreName)"
+            :key="index" @click="openShowDetailsModal(show)">
+            <img :src="show?.image?.medium"
+              class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
             <div
               class="bg-white bg-opacity-50 w-full backdrop-blur-sm drop-shadow-lg rounded-b-lg hover:bg-gray-500 hover:text-white hover:cursor-pointer absolute bottom-0 p-2 text-gray-900">
               <span class="font-bold text-sm truncate flex items-center justify-center">{{ show.name }}</span>
