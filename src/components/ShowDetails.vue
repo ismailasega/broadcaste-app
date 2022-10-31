@@ -17,10 +17,13 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
 
 </script>
 <style scoped>
+.detailsModal{
+  height: 100vh;  
+}
 
 </style>
 <template>
-  <div class="top-0  px-4 block fixed z-30 w-full h-screen bg-[#181818] h-20" v-if="isShowDetailsModal">
+  <div class="top-0 detailsModal px-4 block fixed z-30 w-full bg-[#181818] h-20" v-if="isShowDetailsModal">
     <div class="flex items-center justify-between border-b border-gray-400 p-4">
       <div class="text-2xl font-bold">Movie Title</div>
       <XCircleIcon @click="closeShowDetailsModal" class="h-10 w-10 hover:cursor-pointer hover:text-lime-600"/>
