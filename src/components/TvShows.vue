@@ -52,8 +52,14 @@ const showListing = (showGenre) => {
  * Setting modal to display specific show details
  */
 const isShowDetailsModal = ref(false);
+const selectedShowDetails = ref([]);
 
-const openShowDetailsModal = () => isShowDetailsModal.value = true;
+const openShowDetailsModal = (showDetails) => {
+  isShowDetailsModal.value = true;
+  selectedShowDetails.value = showDetails
+  console.log('myShow', selectedShowDetails.value)
+
+}
 const closeShowDetailsModal = () => isShowDetailsModal.value = false;
 
 provide("isShowDetailsModal", isShowDetailsModal);
@@ -86,7 +92,7 @@ onMounted(() => {
   }
 </style>
 <template>
-<ShowDetails />
+<ShowDetails :selectedShowDetails="selectedShowDetails" />
   <div class="relative">
     <Header />
     <div class="desktop-view px-6 py-20">
@@ -95,7 +101,7 @@ onMounted(() => {
         <div class="flex relative flex-grow duration-700 ease-in-out items-center space-x-6">
           <!-- <span><ChevronLeftIcon class="h-10"/></span> -->
 
-          <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index" @click="openShowDetailsModal">
+          <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index" @click="openShowDetailsModal(show)">
             <img :src="show?.image?.medium" class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
             <div
               class="bg-white bg-opacity-50 backdrop-blur-sm drop-shadow-lg rounded-b-lg hover:bg-gray-500 hover:text-white hover:cursor-pointer absolute bottom-0 p-2 w-full text-gray-900">

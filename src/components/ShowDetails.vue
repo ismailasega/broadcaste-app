@@ -9,7 +9,9 @@
 
 <script setup>
 import { inject } from 'vue'
-import { XCircleIcon } from '@heroicons/vue/solid'
+import { XCircleIcon, ChevronLeftIcon } from '@heroicons/vue/solid'
+
+defineProps(['selectedShowDetails'])
 
 const isShowDetailsModal = inject("isShowDetailsModal");
 const openShowDetailsModal = inject("closeShowDetailsModal");
@@ -23,10 +25,33 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
 
 </style>
 <template>
-  <div class="top-0 detailsModal px-4 block fixed z-30 w-full bg-[#181818] h-20" v-if="isShowDetailsModal">
+<!-- Desktop View -->
+  <div class="top-0 desktop-view detailsModal px-4 block fixed z-30 w-full bg-[#181818] h-20" v-if="isShowDetailsModal">
     <div class="flex items-center justify-between border-b border-gray-400 p-4">
-      <div class="text-2xl font-bold">Movie Title</div>
+      <div class="text-2xl font-bold">{{selectedShowDetails.name}}</div>
       <XCircleIcon @click="closeShowDetailsModal" class="h-10 w-10 hover:cursor-pointer hover:text-lime-600"/>
+    </div>
+    <div class="mt-6 p-4 relative flex flex-row flex-1 overflow-auto ">
+      <div class="w-1/2">
+      <img :src="selectedShowDetails?.image?.original" class="rounded-lg w-[500px] flex items-center justify-center" />
+      </div>
+      <div class="w-1/2">
+      </div>
+    </div>
+  </div>
+  <!-- Mobile View -->
+  <div class="top-0 mobile-view detailsModal block fixed z-30 w-full bg-[#181818] h-20" v-if="isShowDetailsModal">
+    <div class="">
+      <img :src="selectedShowDetails?.image?.original" class="rounded-lg w-[500px] op flex items-center justify-center opacity-60" />
+      <div class="grid justify-items-stretch absolute top-4 z-10">
+      <ChevronLeftIcon @click="closeShowDetailsModal" class="h-12 w-12 justify-self-end hover:cursor-pointer hover:text-lime-600"/>
+      </div>
+    </div>
+    <div class="mt-6 relative flex flex-col flex-1 overflow-auto ">
+      <div class="">
+      </div>
+      <div class="w-1/2">
+      </div>
     </div>
   </div>
 
