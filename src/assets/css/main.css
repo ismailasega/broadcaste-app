@@ -24,3 +24,18 @@
   background: dimgray;
   border-radius: 50px;
 }
+
+.mobile-view {
+  display: none;
+}
+
+@media (max-width: 450px) {
+  .mobile-view {
+    display: block;
+  }
+  
+  .desktop-view {
+    display: none;
+  }
+
+}

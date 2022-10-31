@@ -41,9 +41,9 @@ input{
               <SearchIcon class="h-4" />
               <span class="text-sm ml-2 font-md">Search...</span>
             </div>
-            <div v-if="searchField" class="flex border border-gray-600 rounded p-1 items-center flex-row">
+            <div v-if="searchField" class="flex border border-gray-600 rounded p-1.5 items-center flex-row">
               <SearchIcon class="h-4"/>
-              <input class="ml-2" type="text" autofocus />
+              <input class="ml-2 w-full" type="text" autofocus />
               <XCircleIcon @click="hideSearchField" class="h-4 hover:cursor-pointer hover:text-lime-600"/>
             </div>
         </div>
