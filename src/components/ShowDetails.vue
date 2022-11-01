@@ -130,7 +130,7 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
     </div>
   </div>
   <!-- Mobile View -->
-  <div class="top-0 mobile-view detailsModal block overflow-y-auto pb-40 fixed z-30 w-full bg-[#181818]"
+  <div class="top-0 mobile-view detailsModal block overflow-y-auto pb-20 fixed z-30 w-full bg-[#181818]"
     v-if="isShowDetailsModal">
     <div class="relative">
       <img :src="selectedShowDetails?.image?.original"

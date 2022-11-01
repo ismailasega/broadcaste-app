@@ -17,7 +17,7 @@ import ShowDetails from './ShowDetails.vue'
 
 const showsStore = useShowsStore()
 
-const { shows } = storeToRefs(showsStore);
+const { shows, isLoading } = storeToRefs(showsStore);
 
 /**
  * 
@@ -93,6 +93,7 @@ onMounted(() => {
   <ShowDetails :selectedShowDetails="selectedShowDetails" />
   <div class="">
     <Header />
+    {{isLoading}}
     <div class="desktop-view px-6 py-20">
       <div class="mt-5" v-for="(genreName, index) in groupByGenre" :key="index">
         <div class="flex flex-row items-center justify-between">
