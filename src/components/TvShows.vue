@@ -8,16 +8,20 @@
  -->
 
 <script setup>
-import { onMounted, computed, provide, ref } from "vue";
+import { onMounted, computed, provide, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import Header from './Layout/Header.vue';
-import { useShowsStore } from '@/stores/ShowsStore';
+import { useShowsStore } from '../stores/ShowsStore';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/outline'
 import ShowDetails from './ShowDetails.vue'
 
 const showsStore = useShowsStore()
 
 const { shows, isLoading } = storeToRefs(showsStore);
+
+const tvShowsList = ref(null);
+const isShowDetailsModal = ref(false);
+const selectedShowDetails = ref([]);
 
 /**
  * 
@@ -51,8 +55,6 @@ const showListing = (showGenre) => {
  * 
  * Setting modal to display specific show details
  */
-const isShowDetailsModal = ref(false);
-const selectedShowDetails = ref([]);
 
 const openShowDetailsModal = (showDetails) => {
   isShowDetailsModal.value = true;
@@ -71,6 +73,42 @@ provide("closeShowDetailsModal", closeShowDetailsModal);
 
 /**
  * 
+ * Tv show desktop view horizontal scroll
+ */
+const scrollTo = (element, scrollPixels, duration) => {
+      const scrollPos = element.scrollLeft;
+      // Condition to check if scrolling is required
+      if ( !( (scrollPos === 0 || scrollPixels > 0) && (element.clientWidth + scrollPos === element.scrollWidth || scrollPixels < 0))) 
+      {
+        // Get the start timestamp
+        const startTime =
+          "now" in window.performance
+            ? performance.now()
+            : new Date().getTime();
+        function scroll(timestamp) {
+          const timeElapsed = timestamp - startTime;
+          const progress = Math.min(timeElapsed / duration, 1);
+          element.scrollLeft = scrollPos + scrollPixels * progress;
+          if (timeElapsed < duration) {
+            window.requestAnimationFrame(scroll);
+          } else {
+            return;
+          }
+        }
+        //Call requestAnimationFrame on scroll function first time
+        window.requestAnimationFrame(scroll);
+      }
+    }
+
+const previouShowsList = () => {
+    scrollTo(tvShowsList.value[0], -300, 800)
+}
+const nextShowsList = () => {
+    scrollTo(tvShowsList.value[0], 300, 800);
+}
+
+/**
+ * 
  * Setting data display whenever the component is rendered
  */
 onMounted(() => {
@@ -84,7 +122,6 @@ onMounted(() => {
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 }
-
 .movie-card {
   display: inline-block;
 }
@@ -100,15 +137,15 @@ onMounted(() => {
           <div class="text-gray-300 text-lg mb-2 font-light ">{{ genreName }}</div>
           <div class="flex flex-row">
             <span>
-              <ChevronLeftIcon class="h-6 hover:text-white hover:cursor-pointer" />
+              <ChevronLeftIcon class="h-6 hover:text-white hover:cursor-pointer" @click="previouShowsList(genreName)"/>
             </span>
             <span>
-              <ChevronRightIcon class="h-6 hover:text-white hover:cursor-pointer" />
+              <ChevronRightIcon class="h-6 hover:text-white hover:cursor-pointer" @click="nextShowsList(genreName)"/>
             </span>
           </div>
         </div>
-        <div class="flex relative flex-grow duration-700 ease-in-out items-center space-x-6">
-          <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index"
+        <div ref="tvShowsList" class="flex overflow-hidden relative w-[100vw] flex-grow duration-700 ease-in-out items-center space-x-6"  >
+          <div class="flex-shrink-0 shadow-xl"  v-for="(show, index) in showListing(genreName)" :key="index"
             @click="openShowDetailsModal(show)">
             <img :src="show?.image?.medium"
               class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
