@@ -134,7 +134,7 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
     v-if="isShowDetailsModal">
     <div class="relative">
       <img :src="selectedShowDetails?.image?.original"
-        class="opacity-70 w-[500px]" />
+        class="opacity-70 w-[500px] h-[650px]" />
       <div class="bg-gradient-to-t from-[#181818] h-full absolute bottom-0 p-2 w-full text-gray-900"></div>
       <div class="m-10 ">
         <div
