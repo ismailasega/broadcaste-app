@@ -121,7 +121,7 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
     </div>
   </div>
   <!-- Mobile View -->
-  <div class="top-0 mobile-view detailsModal block overflow-y-auto pb-10 fixed z-30 w-full bg-[#181818] h-20"
+  <div class="top-0 mobile-view detailsModal block overflow-y-auto pb-20 fixed z-30 w-full bg-[#181818] h-20"
     v-if="isShowDetailsModal">
     <div class="relative">
       <img :src="selectedShowDetails?.image?.original"
@@ -129,15 +129,15 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
       <div class="bg-gradient-to-t from-[#181818] h-full absolute bottom-0 p-2 w-full text-gray-900"></div>
       <div class="m-10 ">
         <div
-          class="bg-white bg-opacity-20 flex flex-col z-40 backdrop-blur-sm drop-shadow-lg h-[150px] rounded-lg absolute bottom-0 p-2 w-full text-white">
+          class="bg-white bg-opacity-10 flex flex-col z-40 backdrop-blur-xm drop-shadow-lg rounded-lg absolute bottom-0 p-2 w-full text-white">
           <span class="font-bold text-xl px-2 mb-4">{{ selectedShowDetails?.name }}</span>
           <div class="flex flex-col px-4">
-            <div class="flex flex-wrap jitems-center justify-between">
+            <div class="grid grid-cols-3 gap-2 text-center">
               <span v-for="(genre, index) in selectedShowDetails?.genres" :key="index">
-                <span class="bg-pink-600 justify-self-center rounded-md py-1 px-4 text-sm ">{{ genre }}</span>
+                <span class="bg-pink-600 flex items-center justify-center rounded-md py-1 px-4 text-sm">{{ genre }}</span>
               </span>
             </div>
-            <div class="flex-row flex justify-between items-center border-t boder-gray-600 pt-3 mt-4">
+            <div class="flex-row flex justify-between items-center border-t border-gray-700 pt-4 mb-3 mt-4">
               <span class="bg-slate-600 rounded-md py-1 px-4 text-sm ">{{ selectedShowDetails?.type }}</span>
               <span class="bg-blue-600 rounded-md py-1 px-4 text-sm ">{{ selectedShowDetails?.runtime + ' '
                   + 'mins'
