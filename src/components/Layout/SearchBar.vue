@@ -11,7 +11,7 @@
 import { ref, onMounted, computed, reactive } from "vue";
 import { SearchIcon } from '@heroicons/vue/outline'
 import { XCircleIcon, EmojiSadIcon } from '@heroicons/vue/solid'
-import { useShowsStore } from '@/stores/ShowsStore';
+import { useShowsStore } from '../../stores/ShowsStore';
 
 const showsStore = useShowsStore()
 
@@ -21,6 +21,8 @@ const state = reactive({
 
 const isSearch = ref(true);
 const searchField = ref(false);
+const keyword = ref("");
+
 /**
  * 
  * Methods to toggle the search field input section
@@ -58,7 +60,6 @@ const hideSearchOptions = () => {
  * 
  * Search autocomplete input field filter
  */
-const keyword = ref("");
 const filteredShowNames = computed(() => {
   let tvShowName = [];
   if (!keyword) {
