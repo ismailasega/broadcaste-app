@@ -4,6 +4,7 @@ import { setActivePinia, createPinia } from 'pinia';
 import { useShowsStore } from '../stores/ShowsStore';
 import Header from '../components/Layout/Header.vue';
 import SearchBar from '../components/Layout/SearchBar.vue'
+import TvShows from '../components/TvShows.vue'
 
 /**
  *
@@ -57,6 +58,19 @@ describe('Render Search Bar Component', () => {
     const searchKeyword = "Kirby Buckets"
     wrapper.vm.selectedShowName(searchKeyword)
     expect(wrapper.vm.keyword).toBe(searchKeyword.name) 
+  })
+})
+
+/**
+ *
+ *  Testing Tv Shows Listing and show details component
+ */
+ describe('Should render Tv shows component and trigger rendering showDetail Modal', () => {
+  it.concurrent('should render tv list component', async () => {
+    const wrapper = shallowMount(TvShows)
+    wrapper.find({ ref: "getSelected" }).trigger("click");
+    var result = await wrapper.vm.isShowDetailsModal
+    expect(result).toBeTruthy();
   })
 })
 

@@ -57,7 +57,6 @@ const showListing = (showGenre) => {
  */
 
 const openShowDetailsModal = (showDetails) => {
-  console.log('myData', showDetails)
   isShowDetailsModal.value = true;
   selectedShowDetails.value = showDetails;
   document.documentElement.style.overflow = 'hidden'
@@ -151,7 +150,7 @@ onMounted(() => {
           </svg>
           <div ref="tvShowsList"
             class="flex overflow-hidden relative w-full flex-grow duration-700 ease-in-out items-center space-x-6">
-            <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index"
+            <div ref="getSelected" class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index"
               @click="openShowDetailsModal(show)">
               <img :src="show?.image?.medium"
                 class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
