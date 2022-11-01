@@ -120,7 +120,7 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
       <div class="p-5 bg-black bg-opacity-30 rounded-xl">
         <div class="mt-2 pb-4">
           <h6 class="text-gray-200 font-medium text-md">Summary</h6>
-          <div class="text-sm" v-html="!selectedShowDetails?.summary ? 'Not Specified' : selectedShowDetails?.summar"> </div>
+          <div class="text-sm" v-html="!selectedShowDetails?.summary ? 'Not Specified' : selectedShowDetails?.summary"> </div>
         </div>
         <div class="mt-2">
           <h6 class="text-gray-200 font-medium text-md">Official site</h6>
