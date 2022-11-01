@@ -52,11 +52,11 @@ describe("Render Header Component", () => {
  *  Testing search bar component
  */
 describe('Render Search Bar Component', () => {
-  it('incrementCounter method', () => {
+  it('selectedShowName method', () => {
     const wrapper = shallowMount(SearchBar)
     const searchKeyword = "Kirby Buckets"
     wrapper.vm.selectedShowName(searchKeyword)
-    expect(wrapper.vm.keyword).toBe("Kirby Buckets") 
+    expect(wrapper.vm.keyword).toBe(searchKeyword.name) 
   })
 })
 
