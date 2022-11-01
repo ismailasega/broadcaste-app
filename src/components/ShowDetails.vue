@@ -20,13 +20,14 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
 </script>
 <style scoped>
 .detailsModal {
-  height: 100vh;
+  height: 100vh
 }
+
 </style>
 <template>
   <!-- Desktop View -->
   <div
-    class="top-0 desktop-view detailsModal pb-10 block fixed overflow-x-hidden overflow-y-auto z-30 w-full bg-[#181818] h-20"
+    class="top-0 left-0 right-0 desktop-view detailsModal pb-10 block fixed overflow-x-hidden overflow-y-auto z-30 w-full bg-[#181818] h-20"
     v-if="isShowDetailsModal">
     <div class="w-[1039px] m-auto ">
       <div class="absolute -top-20">
@@ -99,7 +100,7 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
                 <h6 class="text-gray-200 font-medium text-md">Web Channel</h6>
                 <div class="flex flex-col">
                   <span class="text-sm">{{ selectedShowDetails?.webChannel?.name }}</span>
-                  <span class="text-sm">Country: {{ selectedShowDetails?.webChannel?.country }}</span>
+                  <span class="text-sm">Country: {{ selectedShowDetails?.webChannel?.country?.name }}</span>
 
                 </div>
               </div>

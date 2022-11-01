@@ -56,11 +56,14 @@ const selectedShowDetails = ref([]);
 
 const openShowDetailsModal = (showDetails) => {
   isShowDetailsModal.value = true;
-  selectedShowDetails.value = showDetails
-  console.log('myShow', selectedShowDetails.value)
+  selectedShowDetails.value = showDetails;
+  document.documentElement.style.overflow = 'hidden'
 
 }
-const closeShowDetailsModal = () => isShowDetailsModal.value = false;
+const closeShowDetailsModal = () => {
+  isShowDetailsModal.value = false; 
+  document.documentElement.style.overflow = 'auto';
+}
 
 provide("isShowDetailsModal", isShowDetailsModal);
 provide("openShowDetailsModal", openShowDetailsModal);
@@ -86,19 +89,21 @@ onMounted(() => {
   display: inline-block;
 }
 
-.scrolling-wrapper::-webkit-scrollbar {
-  display: none;
-}
 </style>
 <template>
   <ShowDetails :selectedShowDetails="selectedShowDetails" />
-  <div class="relative">
+  <div class="">
     <Header />
     <div class="desktop-view px-6 py-20">
-      <div class="mt-5 " v-for="(genreName, index) in groupByGenre" :key="index">
-        <div class="text-gray-300 text-lg mb-2 font-light ">{{ genreName }}</div>
+      <div class="mt-5" v-for="(genreName, index) in groupByGenre" :key="index">
+        <div class="flex flex-row items-center justify-between">
+          <div class="text-gray-300 text-lg mb-2 font-light ">{{ genreName }}</div>
+        <div class="flex flex-row">
+          <span><ChevronLeftIcon class="h-6 hover:text-white hover:cursor-pointer"/></span> 
+          <span><ChevronRightIcon class="h-6 hover:text-white hover:cursor-pointer"/></span>
+        </div>
+        </div>
         <div class="flex relative flex-grow duration-700 ease-in-out items-center space-x-6">
-          <!-- <span><ChevronLeftIcon class="h-10"/></span> -->
           <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index"
             @click="openShowDetailsModal(show)">
             <img :src="show?.image?.medium"
@@ -108,7 +113,6 @@ onMounted(() => {
               <span class="font-bold flex items-center justify-center">{{ show.name }}</span>
             </div>
           </div>
-          <!-- <span><ChevronRightIcon class="h-10"/></span> -->
         </div>
       </div>
     </div>
