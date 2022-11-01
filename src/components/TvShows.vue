@@ -61,7 +61,7 @@ const openShowDetailsModal = (showDetails) => {
 
 }
 const closeShowDetailsModal = () => {
-  isShowDetailsModal.value = false; 
+  isShowDetailsModal.value = false;
   document.documentElement.style.overflow = 'auto';
 }
 
@@ -88,7 +88,6 @@ onMounted(() => {
 .movie-card {
   display: inline-block;
 }
-
 </style>
 <template>
   <ShowDetails :selectedShowDetails="selectedShowDetails" />
@@ -98,10 +97,14 @@ onMounted(() => {
       <div class="mt-5" v-for="(genreName, index) in groupByGenre" :key="index">
         <div class="flex flex-row items-center justify-between">
           <div class="text-gray-300 text-lg mb-2 font-light ">{{ genreName }}</div>
-        <div class="flex flex-row">
-          <span><ChevronLeftIcon class="h-6 hover:text-white hover:cursor-pointer"/></span> 
-          <span><ChevronRightIcon class="h-6 hover:text-white hover:cursor-pointer"/></span>
-        </div>
+          <div class="flex flex-row">
+            <span>
+              <ChevronLeftIcon class="h-6 hover:text-white hover:cursor-pointer" />
+            </span>
+            <span>
+              <ChevronRightIcon class="h-6 hover:text-white hover:cursor-pointer" />
+            </span>
+          </div>
         </div>
         <div class="flex relative flex-grow duration-700 ease-in-out items-center space-x-6">
           <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index"
@@ -136,3 +139,4 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
