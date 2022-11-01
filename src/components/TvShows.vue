@@ -138,30 +138,33 @@ onMounted(() => {
   <div class="">
     <Header />
     {{ isLoading }}
-    <div class="desktop-view px-6 py-20">
+    <div class="desktop-view container mx-auto px-2 py-14">
       <div class="mt-5" v-for="(genreName, index) in groupByGenre" :key="index">
         <div class="flex flex-row items-center justify-between">
-          <div class="text-gray-300 text-lg mb-2 font-light ">{{ genreName }}</div>
-          <div class="flex flex-row">
-            <span>
-              <ChevronLeftIcon class="h-6 hover:text-white hover:cursor-pointer" @click="previouShowsList(genreName)" />
-            </span>
-            <span>
-              <ChevronRightIcon class="h-6 hover:text-white hover:cursor-pointer" @click="nextShowsList(genreName)" />
-            </span>
-          </div>
+          <div class="text-gray-300 px-10 text-lg mb-2 font-light ">{{ genreName }}</div>
         </div>
-        <div ref="tvShowsList"
-          class="flex overflow-hidden relative w-[100vw] flex-grow duration-700 ease-in-out items-center space-x-6">
-          <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index"
-            @click="openShowDetailsModal(show)">
-            <img :src="show?.image?.medium"
-              class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
-            <div
-              class="bg-white bg-opacity-50 backdrop-blur-sm drop-shadow-lg rounded-b-lg hover:bg-gray-500 hover:text-white hover:cursor-pointer absolute bottom-0 p-2 w-full text-gray-900">
-              <span class="font-bold flex items-center justify-center">{{ show.name }}</span>
+        <div class="flex text-transparent hover:text-gray-400 flex-row items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+            @click="previouShowsList(genreName)" stroke="currentColor"
+            class="hover:text-white hover:cursor-pointer w-10 h-10">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+          <div ref="tvShowsList"
+            class="flex overflow-hidden relative w-full flex-grow duration-700 ease-in-out items-center space-x-6">
+            <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index"
+              @click="openShowDetailsModal(show)">
+              <img :src="show?.image?.medium"
+                class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
+              <div
+                class="bg-white bg-opacity-50 backdrop-blur-sm drop-shadow-lg rounded-b-lg hover:bg-gray-500 hover:text-white hover:cursor-pointer absolute bottom-0 p-2 w-full text-gray-900">
+                <span class="font-bold flex items-center justify-center">{{ show.name }}</span>
+              </div>
             </div>
           </div>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" @click="nextShowsList(genreName)"
+            stroke-width="1" stroke="currentColor" class="hover:text-white hover:cursor-pointer w-10 h-10">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
         </div>
       </div>
     </div>
