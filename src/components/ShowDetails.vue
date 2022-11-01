@@ -129,7 +129,7 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
       <div class="m-10 ">
         <div
           class="bg-white bg-opacity-20 flex flex-col z-40 backdrop-blur-sm drop-shadow-lg h-[150px] rounded-lg absolute bottom-0 p-2 w-full text-white">
-          <span class="font-bold text-xl mb-4">{{ selectedShowDetails?.name }}</span>
+          <span class="font-bold text-xl px-2 mb-4">{{ selectedShowDetails?.name }}</span>
           <div class="flex flex-col px-4">
             <div class="flex flex-wrap jitems-center justify-between">
               <span v-for="(genre, index) in selectedShowDetails?.genres" :key="index">
@@ -156,7 +156,7 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
       </div>
     </div>
     <div class="mt-20 px-6 z-40">
-      <div class="flex flex-row items-center justify-between border-b border-gray-700 pb-4">
+      <div class="flex px-4 flex-row items-center justify-between border-b border-gray-700 pb-4">
         <div>
           <h6 class="text-gray-200 font-medium text-md">Language</h6>
           <span class="text-sm">{{ selectedShowDetails?.language }}</span>
@@ -170,7 +170,7 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
           <span class="text-sm">{{ selectedShowDetails?.status }}</span>
         </div>
       </div>
-      <div class="mt-2 border-b border-gray-700 pb-4">
+      <div class="mt-2 px-4 border-b border-gray-700 pb-4">
         <h6 class="text-gray-200 font-medium text-md">Schedule</h6>
         <div class="grid grid-cols-5 gap-2 text-sm justify-between">
           <div v-for="(schedule, index) in selectedShowDetails?.schedule?.days" :key="index">
@@ -179,7 +179,7 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
         </div>
         <span class="text-sm">Time: {{ selectedShowDetails?.schedule?.time }}</span>
       </div>
-      <div class="mt-2  pb-4">
+      <div class="mt-2 px-4 pb-4">
         <h6 class="text-gray-200 font-medium text-md">Network</h6>
         <div class="flex flex-col">
           <span class="text-sm">{{ selectedShowDetails.network?.name }}</span>
