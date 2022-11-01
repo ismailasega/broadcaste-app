@@ -22,7 +22,6 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
 .detailsModal {
   height: 100vh
 }
-
 </style>
 <template>
   <!-- Desktop View -->
@@ -47,7 +46,8 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
             <h6 class="text-gray-200 font-medium text-md pb-2">Genres</h6>
             <div class="grid grid-cols-4 gap-2 pb-2 text-center">
               <span v-for="(genre, index) in selectedShowDetails?.genres" :key="index">
-                <span class="border border-gray-600 rounded-lg py-1 px-4 flex items-center justify-center text-sm">{{ genre }}</span>
+                <span class="border border-gray-600 rounded-lg py-1 px-4 flex items-center justify-center text-sm">{{
+                  genre }}</span>
               </span>
             </div>
             <div class="flex-row flex justify-between items-center pt-2 mt-2">
@@ -58,16 +58,16 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
               <div>
                 <h6 class="text-gray-200 font-medium text-md mb-1">Runtime</h6>
                 <span class="bg-blue-600 rounded-md py-1 px-4 text-sm ">{{ !selectedShowDetails?.runtime + ' '
-                    + 'mins' ? '--' + ' ' + 'mins' : selectedShowDetails?.runtime + ' ' + 'mins'
-                }}</span>
+                  + 'mins' ? '--' + ' ' + 'mins' : selectedShowDetails?.runtime + ' ' + 'mins'
+                  }}</span>
               </div>
               <div>
-              <h6 class="text-gray-200 font-medium text-md mb-1">Rating</h6>
-              <span class="bg-orange-600 rounded-md py-1 px-4 text-sm flex flex-row items-center "><span>{{
-                  !selectedShowDetails?.rating?.average ? 0 : selectedShowDetails?.rating?.average
-              }}</span>
-                <StarIcon class="ml-1 h-4 w-4" />
-              </span>
+                <h6 class="text-gray-200 font-medium text-md mb-1">Rating</h6>
+                <span class="bg-orange-600 rounded-md py-1 px-4 text-sm flex flex-row items-center "><span>{{
+                    !selectedShowDetails?.rating?.average ? 0 : selectedShowDetails?.rating?.average
+                    }}</span>
+                  <StarIcon class="ml-1 h-4 w-4" />
+                </span>
               </div>
             </div>
             <div class="flex flex-row items-center justify-between mt-5 border-b border-gray-700 pb-4">
@@ -90,18 +90,22 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
               <h6 class="text-gray-200 font-medium text-md pb-2">Schedule</h6>
               <div class="grid grid-cols-4 gap-2 pb-2 text-center">
                 <div v-for="(schedule, index) in selectedShowDetails?.schedule?.days" :key="index">
-                  <span class="border border-gray-600 rounded-lg py-1 px-4 flex items-center justify-center text-sm">{{schedule}}</span>
+                  <span
+                    class="border border-gray-600 rounded-lg py-1 px-4 flex items-center justify-center text-sm">{{schedule}}</span>
                 </div>
               </div>
-              <span class="text-sm">Time: {{ !selectedShowDetails?.schedule?.time ? 'Not Specified' : selectedShowDetails?.schedule?.time  }}</span>
+              <span class="text-sm">Time: {{ !selectedShowDetails?.schedule?.time ? 'Not Specified' :
+                selectedShowDetails?.schedule?.time }}</span>
             </div>
             <div class=" mt-2 pb-4 flex flex-row items-center">
               <div class=" border-r border-gray-600 pr-5 ">
                 <h6 class="text-gray-200 font-medium text-md">Network</h6>
                 <div class="flex flex-col">
                   <span class="text-sm">{{ selectedShowDetails?.network?.name }}</span>
-                  <span class="text-sm">Country: {{ !selectedShowDetails?.network?.country?.name ? 'Not Specified' : selectedShowDetails?.network?.country?.name}}</span>
-                  <span class="text-sm">Timezone: {{ !selectedShowDetails?.network?.country?.timezone ? 'Not Specified' : selectedShowDetails?.network?.country?.timezone}}</span>
+                  <span class="text-sm">Country: {{ !selectedShowDetails?.network?.country?.name ? 'Not Specified' :
+                    selectedShowDetails?.network?.country?.name}}</span>
+                  <span class="text-sm">Timezone: {{ !selectedShowDetails?.network?.country?.timezone ? 'Not Specified'
+                    : selectedShowDetails?.network?.country?.timezone}}</span>
 
                 </div>
               </div>
@@ -109,7 +113,8 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
                 <h6 class="text-gray-200 font-medium text-md">Web Channel</h6>
                 <div class="flex flex-col">
                   <span class="text-sm">{{ selectedShowDetails?.webChannel?.name }}</span>
-                  <span class="text-sm">Country: {{ !selectedShowDetails?.webChannel?.country?.name ? 'Not Specified' : selectedShowDetails?.webChannel?.country?.name}}</span>
+                  <span class="text-sm">Country: {{ !selectedShowDetails?.webChannel?.country?.name ? 'Not Specified' :
+                    selectedShowDetails?.webChannel?.country?.name}}</span>
 
                 </div>
               </div>
@@ -120,11 +125,13 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
       <div class="p-5 bg-black bg-opacity-30 rounded-xl">
         <div class="mt-2 pb-4">
           <h6 class="text-gray-200 font-medium text-md">Summary</h6>
-          <div class="text-sm" v-html="!selectedShowDetails?.summary ? 'Not Specified' : selectedShowDetails?.summary"> </div>
+          <div class="text-sm" v-html="!selectedShowDetails?.summary ? 'Not Specified' : selectedShowDetails?.summary">
+          </div>
         </div>
         <div class="mt-2">
           <h6 class="text-gray-200 font-medium text-md">Official site</h6>
-          <a :href="selectedShowDetails?.officialSite" class="text-sm">{{ !selectedShowDetails?.officialSite ? 'Not Specified' : selectedShowDetails?.officialSite }}</a>
+          <a :href="selectedShowDetails?.officialSite" class="text-sm">
+            {{ !selectedShowDetails?.officialSite ? 'Not Specified' : selectedShowDetails?.officialSite }}</a>
         </div>
       </div>
     </div>
@@ -133,8 +140,7 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
   <div class="top-0 mobile-view detailsModal block overflow-y-auto pb-20 fixed z-30 w-full bg-[#181818]"
     v-if="isShowDetailsModal">
     <div class="relative">
-      <img :src="selectedShowDetails?.image?.original"
-        class="opacity-70 w-[500px] h-[650px]" />
+      <img :src="selectedShowDetails?.image?.original" class="opacity-70 w-[500px] h-[650px]" />
       <div class="bg-gradient-to-t from-[#181818] h-full absolute bottom-0 p-2 w-full text-gray-900"></div>
       <div class="m-10 ">
         <div
@@ -143,17 +149,18 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
           <div class="flex flex-col px-4">
             <div class="grid grid-cols-3 gap-2 text-center">
               <span v-for="(genre, index) in selectedShowDetails?.genres" :key="index">
-                <span class="bg-pink-600 flex items-center justify-center rounded-md py-1 px-4 text-sm">{{ genre }}</span>
+                <span class="bg-pink-600 flex items-center justify-center rounded-md py-1 px-4 text-sm">{{ genre
+                  }}</span>
               </span>
             </div>
             <div class="flex-row flex justify-between items-center border-t border-gray-700 pt-4 mb-3 mt-4">
               <span class="bg-slate-600 rounded-md py-1 px-4 text-sm ">{{ selectedShowDetails?.type }}</span>
               <span class="bg-blue-600 rounded-md py-1 px-4 text-sm ">{{ !selectedShowDetails?.runtime + ' '
-                    + 'mins' ? '--' + ' ' + 'mins' : selectedShowDetails?.runtime + ' ' + 'mins'
-              }}</span>
+                + 'mins' ? '--' + ' ' + 'mins' : selectedShowDetails?.runtime + ' ' + 'mins'
+                }}</span>
               <span class="bg-orange-600 rounded-md py-1 px-4 text-sm flex flex-row items-center "><span>{{
                   !selectedShowDetails?.rating?.average ? 0 : selectedShowDetails?.rating?.average
-              }}</span>
+                  }}</span>
                 <StarIcon class="ml-1 h-4 w-4" />
               </span>
             </div>
@@ -184,17 +191,21 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
         <h6 class="text-gray-200 font-medium text-md pb-2">Schedule</h6>
         <div class="grid grid-cols-4 gap-2 pb-2 text-center">
           <div v-for="(schedule, index) in selectedShowDetails?.schedule?.days" :key="index">
-            <span class="border border-gray-600 rounded-lg py-1 px-4 flex items-center justify-center text-sm">{{ schedule }}</span>
+            <span class="border border-gray-600 rounded-lg py-1 px-4 flex items-center justify-center text-sm">{{
+              schedule }}</span>
           </div>
         </div>
-        <span class="text-sm">Time: {{ !selectedShowDetails?.schedule?.time ? 'Not Specified' : selectedShowDetails?.schedule?.time }}</span>
+        <span class="text-sm">Time: {{ !selectedShowDetails?.schedule?.time ? 'Not Specified' :
+          selectedShowDetails?.schedule?.time }}</span>
       </div>
       <div class="mt-2 px-4 pb-4">
         <h6 class="text-gray-200 font-medium text-md">Network</h6>
         <div class="flex flex-col">
           <span class="text-sm">{{ selectedShowDetails.network?.name }}</span>
-          <span class="text-sm">Country: {{ !selectedShowDetails?.network?.country?.name ? 'Not Specified' : selectedShowDetails?.network?.country?.name }}</span>
-          <span class="text-sm">Timezone: {{ !selectedShowDetails?.network?.country?.timezone ? 'Not Specified' : selectedShowDetails?.network?.country?.timezone }}</span>
+          <span class="text-sm">Country: {{ !selectedShowDetails?.network?.country?.name ? 'Not Specified' :
+            selectedShowDetails?.network?.country?.name }}</span>
+          <span class="text-sm">Timezone: {{ !selectedShowDetails?.network?.country?.timezone ? 'Not Specified' :
+            selectedShowDetails?.network?.country?.timezone }}</span>
 
         </div>
       </div>
@@ -202,17 +213,20 @@ const closeShowDetailsModal = inject("closeShowDetailsModal");
         <h6 class="text-gray-200 font-medium text-md">Web Channel</h6>
         <div class="flex flex-col">
           <span class="text-sm">{{ selectedShowDetails?.webChannel?.name }}</span>
-          <span class="text-sm">Country: {{ !selectedShowDetails?.webChannel?.country?.name ? 'Not Specified' : selectedShowDetails?.webChannel?.country?.name }}</span>
+          <span class="text-sm">Country: {{ !selectedShowDetails?.webChannel?.country?.name ? 'Not Specified' :
+            selectedShowDetails?.webChannel?.country?.name }}</span>
         </div>
       </div>
       <div class="p-4 bg-black bg-opacity-30 rounded-xl">
         <div class="pb-4">
           <h6 class="text-gray-200 font-medium text-md">Summary</h6>
-          <div class="text-sm" v-html="!selectedShowDetails?.summary ? 'Not Specified' : selectedShowDetails?.summary"> </div>
+          <div class="text-sm" v-html="!selectedShowDetails?.summary ? 'Not Specified' : selectedShowDetails?.summary">
+          </div>
         </div>
         <div class="mt-2 border-b border-gray-700 pb-4">
           <h6 class="text-gray-200 font-medium text-md">Official site</h6>
-          <a :href="selectedShowDetails?.officialSite" class="text-sm">{{ !selectedShowDetails?.officialSite ? 'Not Specified' : selectedShowDetails?.officialSite}}</a>
+          <a :href="selectedShowDetails?.officialSite" class="text-sm">
+          {{ !selectedShowDetails?.officialSite ? 'Not Specified' : selectedShowDetails?.officialSite}}</a>
         </div>
 
       </div>
