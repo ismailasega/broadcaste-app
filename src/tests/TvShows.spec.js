@@ -66,7 +66,7 @@ describe('Render Search Bar Component', () => {
  *  Testing Tv Shows Listing and show details component
  */
  describe('Should render Tv shows component and trigger rendering showDetail Modal', () => {
-  it.concurrent('should render tv list component', async () => {
+  it('trigger a click to open showDetails modal', async () => {
     const wrapper = shallowMount(TvShows)
     wrapper.find({ ref: "getSelected" }).trigger("click");
     var result = await wrapper.vm.isShowDetailsModal
