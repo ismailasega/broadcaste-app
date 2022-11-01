@@ -18,7 +18,7 @@ import SearchBar from './SearchBar.vue'
     <!-- Desktop View -->
     <div
         class="desktop-view flex top-0 fixed z-20 bg-black h-20 px-4 w-full shadow-md flex-row items-center justify-between">
-        <div class="font-bold text-gray-200 text-xl">BROADCASTER</div>
+        <h1 class="font-bold text-gray-200 text-xl">BROADCASTER</h1>
         <div class="flex items-center flex-row">
             <SearchBar />
             <button class="ml-4 bg-lime-700 hover:bg-lime-600 p-1.5 rounded shadow-md font-md text-white text-sm">Create

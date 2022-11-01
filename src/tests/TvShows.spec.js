@@ -1,24 +1,14 @@
 import { describe, it, expect } from "vitest";
+import { shallowMount } from "@vue/test-utils";
+import { setActivePinia, createPinia } from 'pinia';
+import { useShowsStore } from '../stores/ShowsStore';
+import Header from '../components/Layout/Header.vue';
+import SearchBar from '../components/Layout/SearchBar.vue'
 
-import { mount } from "@vue/test-utils";
-import { createTestingPinia } from "@pinia/testing";
-import TvShows from "../components/TvShows.vue";
-import { setActivePinia, createPinia } from 'pinia'
-import { useShowsStore } from '../stores/ShowsStore'
-
-
-// test("Store is referenced via TvShows component", () => {
-//   const wrapper = mount(TvShows, {
-//       global: {
-//           plugins: [createTestingPinia()],
-//       },
-//   });
-//   const store = useShowsStore();
-//   store.shows = [];
- 
-//   console.log(wrapper.text());
-//  });
-
+/**
+ *
+ *  Testing pinia store application manager
+ */
 describe('Should be able to check array state and return data', () => {
   beforeEach(() => {
     /**
@@ -32,7 +22,6 @@ describe('Should be able to check array state and return data', () => {
     const tvShowsList = useShowsStore();
     expect(tvShowsList.shows).toEqual([]);
     await tvShowsList.getAllTvShows();
-    let data = tvShowsList.shows;
     expect(tvShowsList.shows.length > 0).toBeTruthy();
   })
 
@@ -43,3 +32,29 @@ describe('Should be able to check array state and return data', () => {
     expect(tvShowsList.shows.length >= 1).toBeTruthy();
   })
 })
+
+/**
+ *
+ *  Testing header component
+ */
+describe("Render Header Component", () => {
+  it("should render", () => {
+    const wrapper = shallowMount(Header);
+    const header = wrapper.find('h1').text();
+    const button = wrapper.find('button').text();
+    expect(header).toEqual('BROADCASTER');
+    expect(button).toEqual("Create Account")
+  })
+})
+
+/**
+ *
+ *  Testing search bar component
+ */
+//  describe("Render Search Bar Component", () => {
+//   it("should send param for search", () => {
+//     const wrapper = shallowMount(SearchBar);
+//     let item = "Kirby Buckets";
+//     expect(wrapper.vm.keyword.value).toEqual(item)
+//   })
+// })
