@@ -37,8 +37,8 @@ describe('Should be able to check array state and return data', () => {
  *
  *  Testing header component
  */
-describe("Render Header Component", () => {
-  it("should render", () => {
+describe("Should render Header Component", () => {
+  it("Should check for text on render", () => {
     const wrapper = shallowMount(Header);
     const header = wrapper.find('h1').text();
     const button = wrapper.find('button').text();
@@ -60,14 +60,3 @@ describe('Render Search Bar Component', () => {
   })
 })
 
-/**
- *
- *  Testing search bar component
- */
-//  describe("Render Search Bar Component", () => {
-//   it("should send param for search", () => {
-//     const wrapper = shallowMount(SearchBar);
-//     let item = "Kirby Buckets";
-//     expect(wrapper.vm.keyword.value).toEqual(item)
-//   })
-// })

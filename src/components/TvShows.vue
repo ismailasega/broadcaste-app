@@ -49,7 +49,7 @@ const showListing = (showGenre) => {
     if (typeof show?.genres !== 'undefined' && show.genres.includes(showGenre)) tvShows.push(show)
     else if (typeof show?.show !== 'undefined' && show.show.genres.includes(showGenre)) tvShows.push(show.show)
   })
-  return tvShows;
+  return tvShows.sort((a, b) => Number(b.rating.average) - Number(a.rating.average));
 }
 /**
  * 
@@ -57,6 +57,7 @@ const showListing = (showGenre) => {
  */
 
 const openShowDetailsModal = (showDetails) => {
+  console.log('myData', showDetails)
   isShowDetailsModal.value = true;
   selectedShowDetails.value = showDetails;
   document.documentElement.style.overflow = 'hidden'
