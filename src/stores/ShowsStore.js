@@ -23,6 +23,7 @@ export const useShowsStore = defineStore('ShowsStore', {
          * getting all TvShows
          */
         async getAllTvShows() {
+            this.error = null;
             const url = 'https://api.tvmaze.com/shows?page=1';
             this.isLoading = true
             try {
@@ -41,6 +42,8 @@ export const useShowsStore = defineStore('ShowsStore', {
          * Searching by show name
          */
         async searchShowsByName(showName) {
+            this.shows = [];
+            this.error = null;
             const url = `https://api.tvmaze.com/search/shows?q=${showName}`;
             this.isLoading = true
             try {

@@ -8,7 +8,7 @@
  -->
 
 <script setup>
-import { onMounted, computed, provide, ref, watch } from "vue";
+import { onMounted, computed, provide, ref} from "vue";
 import { storeToRefs } from "pinia";
 import Header from './Layout/Header.vue';
 import { useShowsStore } from '../stores/ShowsStore';
@@ -22,7 +22,6 @@ const { shows, isLoading, error } = storeToRefs(showsStore);
 
 const isShowDetailsModal = ref(false);
 const selectedShowDetails = ref([]);
-const scrollIcon = ref(false);
 
 /**
  * 
@@ -77,7 +76,6 @@ provide("closeShowDetailsModal", closeShowDetailsModal);
  * Tv show desktop view horizontal scroll
  */
 const scrollTo = (element, scrollPixels, duration) => {
-  scrollIcon.value = true
   const scrollPos = element.scrollLeft;
   // Condition to check if scrolling is required
   if (!((scrollPos === 0 || scrollPixels > 0) && (element.clientWidth + scrollPos === element.scrollWidth || scrollPixels < 0))) {
@@ -142,7 +140,7 @@ onMounted(() => {
   <ShowDetails :selectedShowDetails="selectedShowDetails" />
   <div class="">
     <Header />
-    <div v-if="isLoading" class="text-center mt-50 text-gray-300"><Loader /></div>
+    <div v-if="isLoading" class="text-center mt-100 text-gray-300"><Loader /></div>
       <div v-if="error" class="text-center mt-50 text-rose-400">{{error}}</div>
     <div v-if="shows" class="desktop-view container mx-auto px-2 py-14">
       <div class="mt-5" v-for="(genreName, index) in groupByGenre" :key="index">
@@ -158,7 +156,7 @@ onMounted(() => {
           <div
             :id="`list-${index}`"
             class="flex overflow-hidden relative w-full flex-grow duration-700 ease-in-out items-center space-x-6">
-            <div class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index"
+            <div ref="getSelected" class="flex-shrink-0 shadow-xl" v-for="(show, index) in showListing(genreName)" :key="index"
               @click="openShowDetailsModal(show)">
               <img :src="show?.image?.medium"
                 class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
