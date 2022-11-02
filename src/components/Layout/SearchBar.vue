@@ -11,9 +11,12 @@
 import { ref, onMounted, computed, reactive } from "vue";
 import { SearchIcon } from '@heroicons/vue/outline'
 import { XCircleIcon, EmojiSadIcon } from '@heroicons/vue/solid'
+import { storeToRefs } from "pinia";
 import { useShowsStore } from '../../stores/ShowsStore';
 
 const showsStore = useShowsStore()
+
+const { shows } = storeToRefs(showsStore);
 
 const state = reactive({
   searchOptions: false
@@ -47,7 +50,6 @@ const hideSearchField = () => {
  */
 const showSearchOptions = () => {
   state.searchOptions = true
-  showsStore.getAllTvShows()
 }
 
 const hideSearchOptions = () => {
@@ -63,10 +65,10 @@ const hideSearchOptions = () => {
 const filteredShowNames = computed(() => {
   let tvShowName = [];
   if (!keyword) {
-    tvShowName = showsStore.shows
+    tvShowName = shows.value
   }
   if (keyword) {
-    showsStore.shows.filter((show) => {
+    shows.value.filter((show) => {
       if (show?.name
         ?.toString()
         ?.toLowerCase()
@@ -90,9 +92,6 @@ const selectedShowName = (showName) => {
  * 
  * Setting data display whenever the component is rendered
  */
-onMounted(() => {
-  showsStore.getAllTvShows()
-})
 
 </script>
 <style scoped>
