@@ -12,6 +12,7 @@ export const useShowsStore = defineStore('ShowsStore', {
     state: () => {
         return {
             shows: [],
+            searchData: [],
             isLoading: false,
             error: null,
         };
@@ -20,7 +21,7 @@ export const useShowsStore = defineStore('ShowsStore', {
     actions: {
         /**
          * 
-         * getting all TvShows
+         * getting all TvShows on Page 1
          */
         async getAllTvShows() {
             const url = 'https://api.tvmaze.com/shows?page=1';
@@ -33,6 +34,21 @@ export const useShowsStore = defineStore('ShowsStore', {
             } catch (error) {
                 this.error = error
                 this.isLoading = false;
+            }
+        },
+
+        /**
+         * 
+         * getting all TvShows to cater for the search and filter
+         */
+         async getAllSearchableTvShows() {
+            const url = 'https://api.tvmaze.com/shows';
+            this.error = null;
+            try {
+                const tvShows = await axios.get(url);
+                this.searchData = tvShows.data;
+            } catch (error) {
+                this.error = error
             }
         },
 

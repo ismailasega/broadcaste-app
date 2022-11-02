@@ -16,7 +16,7 @@ import { useShowsStore } from '../../stores/ShowsStore';
 
 const showsStore = useShowsStore()
 
-const { shows } = storeToRefs(showsStore);
+const { searchData } = storeToRefs(showsStore);
 
 const state = reactive({
   searchOptions: false
@@ -41,7 +41,7 @@ const hideSearchField = () => {
   searchField.value = false;
   state.searchOptions = false;
   keyword.value = "";
-  showsStore.getAllTvShows()
+  showsStore.getAllTvShows();
 }
 
 /**
@@ -49,7 +49,8 @@ const hideSearchField = () => {
  * Methods to show/hide search options dropdown
  */
 const showSearchOptions = () => {
-  state.searchOptions = true
+  state.searchOptions = true;
+  showsStore.getAllSearchableTvShows();
 }
 
 const hideSearchOptions = () => {
@@ -65,10 +66,10 @@ const hideSearchOptions = () => {
 const filteredShowNames = computed(() => {
   let tvShowName = [];
   if (!keyword) {
-    tvShowName = shows.value
+    tvShowName = searchData.value
   }
   if (keyword) {
-    shows.value.filter((show) => {
+    searchData.value.filter((show) => {
       if (show?.name
         ?.toString()
         ?.toLowerCase()
@@ -92,6 +93,9 @@ const selectedShowName = (showName) => {
  * 
  * Setting data display whenever the component is rendered
  */
+onMounted(() => {
+  showsStore.getAllSearchableTvShows();
+})
 
 </script>
 <style scoped>

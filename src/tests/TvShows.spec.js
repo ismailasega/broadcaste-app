@@ -19,14 +19,21 @@ describe('Should be able to check array state and return data', () => {
     setActivePinia(createPinia());
   })
 
-  it.concurrent('Should returns Tv Shows', async () => {
+  it.concurrent('Should returns Tv Shows on page 1', async () => {
     const tvShowsList = useShowsStore();
     expect(tvShowsList.shows).toEqual([]);
     await tvShowsList.getAllTvShows();
     expect(tvShowsList.shows.length > 0).toBeTruthy();
   })
 
-  it.concurrent('Should be able to return response', async () => {
+  it.concurrent('Should returns all Tv Shows', async () => {
+    const tvShowsList = useShowsStore();
+    expect(tvShowsList.searchData).toEqual([]);
+    await tvShowsList.getAllSearchableTvShows();
+    expect(tvShowsList.searchData.length > 0).toBeTruthy();
+  })
+
+  it.concurrent('Should be able to return response of meatching search', async () => {
     let searchData = "Kirby Buckets";
     const tvShowsList = useShowsStore();
     await tvShowsList.searchShowsByName(searchData);
