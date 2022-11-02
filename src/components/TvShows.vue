@@ -140,9 +140,9 @@ onMounted(() => {
   <ShowDetails :selectedShowDetails="selectedShowDetails" />
   <div class="">
     <Header />
-    <div v-if="isLoading" class="text-center mt-100 text-gray-300"><Loader /></div>
+    <div v-if="isLoading" class="text-center pt-80 text-gray-300"><Loader /></div>
       <div v-if="error" class="text-center mt-50 text-rose-400">{{error}}</div>
-    <div v-if="!isLoading && shows" class="desktop-view container mx-auto px-2 py-14">
+    <div v-if="!isLoading && shows" class="desktop-view container mx-auto px-2 py-20">
       <div class="mt-5" v-for="(genreName, index) in groupByGenre" :key="index">
         <div class="flex flex-row items-center justify-between">
           <div class="text-gray-300 px-10 text-lg mb-2 font-light ">{{ genreName }}</div>
