@@ -11,39 +11,44 @@
 </script>
 <style scoped>
 .loader {
-  width: 5px;
-  height: 20px;
-  border-radius: 4px;
+  width: 40px;
+  height: 40px;
   display: block;
   margin: 20px auto;
   position: relative;
-  background: currentColor;
-  color: gray;
+  border: 3px solid gray;
+  border-radius: 50%;
   box-sizing: border-box;
-  animation: animloader 0.3s 0.3s linear infinite alternate;
+  animation: animloader 2s linear infinite;
 }
-
-.loader::after, .loader::before {
-  content: '';
-  width: 5px;
-  height: 20px;
-  border-radius: 4px;
-  background: currentColor;
+.loader::after {
+  content: '';  
+  box-sizing: border-box;
+  width: 6px;
+  height: 24px;
+  background: gray;
+  transform: rotate(-45deg);
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 20px;
-  box-sizing: border-box;
-  animation: animloader 0.3s  0.45s  linear infinite alternate;
-}
-.loader::before {
-  left: -20px;
-  animation-delay: 0s;
+  bottom: -20px;
+  left: 46px;
 }
 
 @keyframes animloader {
-  0%   { height: 48px} 
-  100% { height: 4px}
+  0% {
+    transform: translate(-10px, -10px);
+  }
+  25% {
+    transform: translate(-10px, 10px);
+  }
+  50% {
+    transform: translate(10px, 10px);
+  }
+  75% {
+    transform: translate(10px, -10px);
+  }
+  100% {
+    transform: translate(-10px, -10px);
+  }
 }
 </style>
 <template>
