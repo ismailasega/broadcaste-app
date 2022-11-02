@@ -1,7 +1,7 @@
 # broadcaster
 
-Broadcaster is a web-app that is displaying a TV shows based on their rating and genre
-live APP: https://mellifluous-choux-1c6526.netlify.app/
+- Broadcaster is a web-app that is displaying a TV shows based on their rating and genre
+- live APP: https://mellifluous-choux-1c6526.netlify.app/
 
 ## App Architecture
 
