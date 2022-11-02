@@ -51,11 +51,20 @@ const showListing = (showGenre) => {
   })
   return tvShows.sort((a, b) => Number(b.rating.average) - Number(a.rating.average));
 }
+
+/**
+ * 
+ * Truncate show names on mobile view
+ */
+const showNameTruncate = (str, length) => {
+  const dots = str.length > length ? '...' : '';
+  return str.substring(0, length)+dots;
+};
+
 /**
  * 
  * Setting modal to display specific Tv show details
  */
-
 const openShowDetailsModal = (showDetails) => {
   isShowDetailsModal.value = true;
   selectedShowDetails.value = showDetails;
@@ -190,7 +199,7 @@ onMounted(() => {
               class="rounded-lg hover:bg-slate-200 hover:cursor-pointer hover:opacity-30" />
             <div
               class="bg-white bg-opacity-50 w-full backdrop-blur-sm drop-shadow-lg rounded-b-lg hover:bg-gray-500 hover:text-white hover:cursor-pointer absolute bottom-0 p-2 text-gray-900">
-              <span class="font-bold text-sm truncate flex items-center justify-center">{{ show.name }}</span>
+              <span class="font-bold text-sm truncate flex items-center justify-center">{{ showNameTruncate(show.name, 12)}}</span>
             </div>
           </div>
         </div>
