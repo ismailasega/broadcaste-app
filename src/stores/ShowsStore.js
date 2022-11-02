@@ -42,11 +42,14 @@ export const useShowsStore = defineStore('ShowsStore', {
          */
         async searchShowsByName(showName) {
             const url = `https://api.tvmaze.com/search/shows?q=${showName}`;
+            this.isLoading = true
             try {
                 const filteredTvShows = await axios.get(url);
                 this.shows = filteredTvShows.data;
+                this.isLoading = false;
             } catch (error) {
                 this.error = error
+                this.isLoading = false;
             }
         },
 

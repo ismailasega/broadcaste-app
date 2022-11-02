@@ -14,10 +14,11 @@ import Header from './Layout/Header.vue';
 import { useShowsStore } from '../stores/ShowsStore';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/outline'
 import ShowDetails from './ShowDetails.vue'
+import Loader from './utils/Loader.vue'
 
 const showsStore = useShowsStore()
 
-const { shows, isLoading } = storeToRefs(showsStore);
+const { shows, isLoading, error } = storeToRefs(showsStore);
 
 const isShowDetailsModal = ref(false);
 const selectedShowDetails = ref([]);
@@ -141,8 +142,9 @@ onMounted(() => {
   <ShowDetails :selectedShowDetails="selectedShowDetails" />
   <div class="">
     <Header />
-    {{ isLoading }}
-    <div class="desktop-view container mx-auto px-2 py-14">
+    <div v-if="isLoading" class="text-center mt-50 text-gray-300"><Loader /></div>
+      <div v-if="error" class="text-center mt-50 text-rose-400">{{error}}</div>
+    <div v-if="shows" class="desktop-view container mx-auto px-2 py-14">
       <div class="mt-5" v-for="(genreName, index) in groupByGenre" :key="index">
         <div class="flex flex-row items-center justify-between">
           <div class="text-gray-300 px-10 text-lg mb-2 font-light ">{{ genreName }}</div>
@@ -176,7 +178,10 @@ onMounted(() => {
 
     <!-- Mobile View -->
     <div class="mobile-view px-6 py-24">
-      <div class="mt-5 " v-for="(genreName, index) in groupByGenre" :key="index">
+      <div v-if="isLoading" class="text-center mt-40 text-gray-300"><Loader /></div>
+      <div v-if="error" class="text-center mt-40 text-rose-400">{{error}}</div>
+      <div v-if="shows">
+      <div class="mt-5" v-for="(genreName, index) in groupByGenre" :key="index">
         <div class="text-gray-300 text-lg mb-2 font-light ">{{ genreName }}</div>
         <div class="flex relative scrolling-wrapper flex-grow duration-700 ease-in-out items-center space-x-6">
           <div class="flex-shrink-0 w-32 movie-card shadow-xl" v-for="(show, index) in showListing(genreName)"
@@ -189,6 +194,7 @@ onMounted(() => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
