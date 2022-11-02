@@ -4,6 +4,7 @@ import { setActivePinia, createPinia } from 'pinia';
 import { useShowsStore } from '../stores/ShowsStore';
 import Header from '../components/Layout/Header.vue';
 import SearchBar from '../components/Layout/SearchBar.vue'
+import TvShows from '../components/TvShows.vue'
 
 /**
  *
@@ -37,8 +38,8 @@ describe('Should be able to check array state and return data', () => {
  *
  *  Testing header component
  */
-describe("Render Header Component", () => {
-  it("should render", () => {
+describe("Should render Header Component", () => {
+  it("Should check for text on render", () => {
     const wrapper = shallowMount(Header);
     const header = wrapper.find('h1').text();
     const button = wrapper.find('button').text();
@@ -51,10 +52,25 @@ describe("Render Header Component", () => {
  *
  *  Testing search bar component
  */
-//  describe("Render Search Bar Component", () => {
-//   it("should send param for search", () => {
-//     const wrapper = shallowMount(SearchBar);
-//     let item = "Kirby Buckets";
-//     expect(wrapper.vm.keyword.value).toEqual(item)
-//   })
-// })
+describe('Render Search Bar Component', () => {
+  it('selectedShowName method', () => {
+    const wrapper = shallowMount(SearchBar)
+    const searchKeyword = "Kirby Buckets"
+    wrapper.vm.selectedShowName(searchKeyword)
+    expect(wrapper.vm.keyword).toBe(searchKeyword.name) 
+  })
+})
+
+/**
+ *
+ *  Testing Tv Shows Listing and show details component
+ */
+ describe('Should render Tv shows component and trigger rendering showDetail Modal', () => {
+  it('trigger a click to open showDetails modal', async () => {
+    const wrapper = shallowMount(TvShows)
+    wrapper.find({ ref: "getSelected" }).trigger("click");
+    var result = await wrapper.vm.isShowDetailsModal
+    expect(result).toBeTruthy();
+  })
+})
+
