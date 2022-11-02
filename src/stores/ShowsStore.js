@@ -23,8 +23,8 @@ export const useShowsStore = defineStore('ShowsStore', {
          * getting all TvShows
          */
         async getAllTvShows() {
-            this.error = null;
             const url = 'https://api.tvmaze.com/shows?page=1';
+            this.error = null;
             this.isLoading = true
             try {
                 const tvShows = await axios.get(url);
